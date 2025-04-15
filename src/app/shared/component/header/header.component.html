@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg bg-warning shadow">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" [routerLink]="'/'">
+      <img ngSrc="/images/favicon.ico" alt="Stock.image" width="30" height="24" class="me-3">
+      <strong>{{ brand }}</strong>
+    </a>
+
+    <button class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <ul class="navbar-nav mx-auto">
+        @for (menuItem of menuItems; track $index) {
+          <li class="nav-item">
+            <a class="nav-link"
+               aria-current="page"
+               [routerLinkActive]="'active'"
+               [routerLink]="menuItem.routerLink">
+              {{ menuItem.label }}
+            </a>
+          </li>
+        }
+      </ul>
+
+<!--      <div class="d-flex ms-auto">-->
+<!--        <button class="btn btn-primary btn-outline-dark"-->
+<!--                (click)="toggleTheme()"-->
+<!--                id="themeToggle"-->
+<!--                title="Switch light mode vs dark mode!">-->
+<!--          Switch Mode-->
+<!--        </button>-->
+<!--      </div>-->
+
+    </div>
+  </div>
+</nav>
