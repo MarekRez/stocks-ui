@@ -1,1 +1,104 @@
-<p>home works!</p>
+<div class="container mt-4 mb-5">
+  <div class="card bg-primary-subtle shadow-lg">
+    <div class="card-body p-4">
+      <h1> {{ title }}</h1>
+      <br>
+      <p>Welcome to Stocks by Marek! This is a simple web application where you can manage clients, their investments, and simulate stock trading and portfolio simulation!</p>
+    </div>
+  </div>
+</div>
+
+<app-carousel [images]="carouselImages"></app-carousel>
+
+<div class="container mt-5">
+
+  <section id="about" class="mb-5">
+    <h2 class="text-center fw-bold mb-4">O StocksByMarek</h2>
+    <p>
+      StocksByMarek je moderná aplikácia pre správu klientskych finančných účtov, ktorá umožňuje sledovanie bankových zostatkov,
+      investícií, a dokonca simuláciu portfólia. Táto platforma je navrhnutá tak, aby kombinovala jednoduchosť a funkčnosť pre
+      efektívne riadenie financií.
+    </p>
+    <p>
+      Funkcie aplikácie sú určené pre správu malých aj veľkých klientskych databáz, pričom poskytujú nástroje na investovanie,
+      predaj akcií a simuláciu trhových podmienok.
+    </p>
+  </section>
+
+  <section id="features" class="mb-5">
+    <h3 class="text-center fw-bold mb-4">Kľúčové funkcie aplikácie</h3>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card shadow-sm border-primary bg-primary-subtle">
+          <div class="card-body">
+            <h5 class="card-title">Správa klientov</h5>
+            <p class="card-text">
+              Jednoducho pridávajte, upravujte alebo odstraňujte klientov. Sledujte všetky dôležité údaje, ako meno, email,
+              bankový zostatok a investičný zostatok.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm border-primary bg-primary-subtle">
+          <div class="card-body">
+            <h5 class="card-title">Investovanie a predaj akcií</h5>
+            <p class="card-text">
+              Ponúkame nástroje na nákup a predaj akcií s reálnym sledovaním zostatkov. Sledujte výnosy, dividendové výnosy a
+              volatilitu trhu.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm border-primary bg-primary-subtle">
+          <div class="card-body">
+            <h5 class="card-title">Simulácia portfólia</h5>
+            <p class="card-text">
+              Využite simuláciu trhových podmienok na predpovedanie vývoja vašich investícií. Získajte lepší prehľad o rizikách
+              a výnosoch.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how-it-works" class="mb-5">
+    <h3 class="text-center fw-bold mb-4">Ako to funguje?</h3>
+    <ol>
+      <li>Prihláste sa alebo zaregistrujte nový účet.</li>
+      <li>Pridajte klienta do systému a vyplňte jeho údaje.</li>
+      <li>Spravujte jeho bankový a investičný účet.</li>
+      <li>Investujte do akcií, predávajte akcie alebo vykonajte simuláciu portfólia.</li>
+      <li>Sledujte výkonnosť investícií prostredníctvom nášho intuitívneho dashboardu.</li>
+    </ol>
+  </section>
+
+  <section id="testimonials" class="mb-5">
+    <h3 class="text-center fw-bold mb-4">Čo hovoria používatelia</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <blockquote class="blockquote">
+          <p>"StocksByMarek mi pomohla efektívne spravovať finančné údaje mojich klientov. Skvelý nástroj pre akúkoľvek firmu!"</p>
+          <footer class="blockquote-footer">Ján Novák, finančný konzultant</footer>
+        </blockquote>
+      </div>
+      <div class="col-md-6">
+        <blockquote class="blockquote">
+          <p>"Simulácia portfólia je pre mňa absolútnym game-changerom. Dokážem lepšie plánovať investičné stratégie."</p>
+          <footer class="blockquote-footer">Anna Horváthová, investičná poradkyňa</footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta" class="text-center py-5 bg-primary-subtle border rounded">
+    <h3 class="fw-bold mb-3">Pridajte sa k nám!</h3>
+    <p>
+      Začnite spravovať svoje financie a investície efektívnejšie ešte dnes. StocksByMarek je nástroj, ktorý potrebujete na
+      dosiahnutie svojich cieľov.
+    </p>
+    <a href="/add-client" class="btn btn-info btn-lg">Zaregistrujte sa</a>
+  </section>
+</div>

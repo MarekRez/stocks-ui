@@ -1,36 +1,13 @@
-<div id="stocksCarousel" class="carousel slide carousel-fade mb-3" data-bs-ride="carousel">
-  <div class="carousel-indicators">
+<ngb-carousel [showNavigationIndicators]="true" [wrap]="true">
     @for (image of images(); track $index) {
-      <button
-        type="button"
-        [class.active]="$index === 0"
-        [attr.data-bs-target]="'#stocksCarousel'"
-        [attr.data-bs-slide-to]="$index"
-        [attr.aria-label]="'Slide ' + ($index + 1)">
-      </button>
-    }
-  </div>
-
-  <div class="carousel-inner">
-    @for (image of images(); track $index) {
-      <div class="carousel-item" [class.active]="$index === 0">
-        <img ngSrc="image.src" class="d-block w-100" [alt]="image.alt" [width]="image.width" [height]="image.height">
+      <ng-template ngbSlide>
+        <img [src]="image.src" class="d-block w-100" [alt]="image.alt" [width]="image.width" [height]="image.height">
         <div class="carousel-caption d-none d-md-block">
           <div class="text-background">
             <h5>{{ image.title }}</h5>
             <p>{{ image.caption }}</p>
           </div>
         </div>
-      </div>
+      </ng-template>
     }
-  </div>
-
-  <button class="carousel-control-prev" type="button" data-bs-target="#stocksCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#stocksCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
+</ngb-carousel>

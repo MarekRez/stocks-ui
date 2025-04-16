@@ -1,5 +1,6 @@
-import {Component, signal} from '@angular/core';
+import {Component, input, Input, signal} from '@angular/core';
 import {NgOptimizedImage} from '@angular/common';
+import {NgbCarousel, NgbSlide} from '@ng-bootstrap/ng-bootstrap';
 
 interface CarouselImage {
   src: string;
@@ -13,12 +14,14 @@ interface CarouselImage {
 @Component({
   selector: 'app-carousel',
   imports: [
-    NgOptimizedImage
+    NgOptimizedImage,
+    NgbCarousel,
+    NgbSlide
   ],
   templateUrl: './carousel.component.html'
 })
 export class CarouselComponent {
 
-  images = signal<CarouselImage[]>([]);
+  images = input.required<CarouselImage[]>();
 
 }

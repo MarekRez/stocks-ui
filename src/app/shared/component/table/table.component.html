@@ -1,0 +1,51 @@
+<div class="table-responsive">
+  <table class="table table-striped table-bordered border-black table-hover text-dark">
+    <thead>
+    <tr>
+      @for (column of columns(); track $index) {
+        <th scope="col">{{column.label}}</th>
+      }
+    </tr>
+    </thead>
+    <tbody>
+
+      @for (row of rows(); track $index) {
+        <tr>
+          @for (column of columns(); track $index) {
+            <td class="text-center align-middle">
+
+              @if (column.attribute) {
+                <span>
+              {{ row[column.attribute] }}
+            </span>
+
+              } @else if (column.text === 'Odstrániť') {
+                <span
+                  (click)="column?.onClick ? column?.onClick(row) : null"
+                  class="btn btn-danger text-white btn-sm"
+                  style="cursor: pointer;"
+                >
+              {{ column.text }}
+            </span>
+
+              } @else if (column.text === 'Upraviť') {
+                <span
+                  (click)="column?.onClick ? column?.onClick(row) : null"
+                  class="btn btn-dark text-white btn-sm"
+                  style="cursor: pointer;"
+                >
+              {{ column.text }}
+            </span>
+              }
+            </td>
+          }
+        </tr>
+
+      } @empty {
+        <div class="px-2 mt-3 text-bg-danger">
+          Žiadne záznamy
+        </div>
+      }
+    </tbody>
+  </table>
+</div>

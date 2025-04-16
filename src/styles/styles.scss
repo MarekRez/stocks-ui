@@ -1,0 +1,48 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Electrolize&display=swap');
+
+// Override Bootstrap variables
+$font-family-base: "Electrolize", sans-serif;
+$body-bg: #f1f1f1;
+
+//$color:#cfe2ff;
+
+// CAROUSEL
+.carousel-caption {
+  font-size: 1rem;
+  font-weight: bold;
+  h5 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+}
+
+#stocksCarousel {
+  max-width: 1400px;
+  margin: 0 auto;     // Centering
+
+  .carousel-item img {
+    width: 100%;
+    max-height: 600px;
+    object-fit: cover; // Crop nicely
+  }
+}
+
+$carousel-transition-duration: 1s;
+//$carousel-dark-caption-color: #fb2828;
+$carousel-caption-color: #000000;
+
+.carousel-caption .text-background {
+  background-color: rgba(207, 226, 255, 0.6);
+  padding: 0.3rem;
+}
+// CAROUSEL END
+
+// Import Bootstrap
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+// Import Bootstrap Icons
+@import "../../node_modules/bootstrap-icons/font/bootstrap-icons";

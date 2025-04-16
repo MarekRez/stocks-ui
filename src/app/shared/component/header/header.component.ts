@@ -1,14 +1,19 @@
-import { Component } from '@angular/core';
-import {MENU_ITEMS} from '../../../core/configuration/menu.cofig';
+import {Component, inject} from '@angular/core';
+import {MENU_ITEMS} from '../../../core/configuration/menu-cofig';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 import {NgOptimizedImage} from '@angular/common';
+import {UserService} from '../../../core/service/user.service';
+import {NgbDropdown, NgbDropdownMenu, NgbDropdownToggle} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-header',
   imports: [
     RouterLink,
     RouterLinkActive,
-    NgOptimizedImage
+    NgOptimizedImage,
+    NgbDropdown,
+    NgbDropdownToggle,
+    NgbDropdownMenu
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
@@ -16,5 +21,17 @@ import {NgOptimizedImage} from '@angular/common';
 export class HeaderComponent {
   brand = 'StocksByMarek';
   menuItems = MENU_ITEMS;
+
+  userService = inject(UserService);
+
+  user = this.userService.getUserSignal();
+
+  login() {
+    this.userService.login();
+  }
+
+  logout() {
+    this.userService.logout();
+  }
 
 }

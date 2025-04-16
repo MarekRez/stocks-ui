@@ -30,6 +30,25 @@
         }
       </ul>
 
+      @if (user(); as user) {
+        <div ngbDropdown class="mt-lg-4" [title]="user.name">
+          <button class="e-user" type="button" ngbDropdownToggle>
+            {{ user.name}}
+          </button>
+
+          <div ngbDropdownMenu>
+            <button type="button" class="dropdown-item disabled" aria-disabled="true">{{ user.name }}</button>
+            <button type="button" class="dropdown-item" (click)="logout()">Logout</button>
+          </div>
+
+
+        </div>
+      } @else {
+        <button class="e-user" type="button" (click)="login()">
+          Login
+        </button>
+      }
+
 <!--      <div class="d-flex ms-auto">-->
 <!--        <button class="btn btn-primary btn-outline-dark"-->
 <!--                (click)="toggleTheme()"-->

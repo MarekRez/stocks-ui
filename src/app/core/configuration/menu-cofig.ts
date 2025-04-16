@@ -6,4 +6,5 @@ export const MENU_ITEMS: MenuItemType[] = [
   {label: 'Portfolio Simulácia', routerLink: '/portfolio'},
   {label: 'Účty', routerLink: '/accounts'},
   {label: 'Investovanie', routerLink: '/investing'},
+  {label: 'Akcie', routerLink: '/create-stock'},
 ];
