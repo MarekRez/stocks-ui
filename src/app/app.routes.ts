@@ -4,10 +4,10 @@ import {canActivateHome} from './core/service/user.service';
 export const routes: Routes = [
   { path: 'home', loadComponent: () => import('./features/home/home.component').
     then(m => m.HomeComponent),
-    canActivate:[canActivateHome]
   },
   { path: 'client-list', loadComponent: () => import('./features/client-list/client-list.component').
-    then(m => m.ClientListComponent)
+    then(m => m.ClientListComponent),
+    canActivate:[canActivateHome]
   },
   { path: 'add-client', loadComponent: () => import('./features/add-client/add-client.component').
     then(m => m.AddClientComponent)
