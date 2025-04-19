@@ -1,4 +1,41 @@
-<app-table
-  [columns]="clientsColumns"
-  [rows]="clients"
-></app-table>
+<div class="container mt-5 mb-5 d-flex border-0 justify-content-center align-items-center">
+  <div class="card shadow-lg text-bg-secondary p-4 w-100" style="max-width: 1100px;">
+    <div class="card-body">
+      <h2 class="text-center mb-5 text-black fw-bold">Zoznam Klientov</h2>
+
+      @if (isLoading()) {
+        <div class="text-center text-muted fs-5 py-3">
+          Načítavam ...
+        </div>
+
+      } @else if (isDeleting()) {
+        <div class="text-center text-muted fs-5 py-3">
+          Odstraňujem ...
+        </div>
+
+      } @else {
+        <form id="searchForm" class="mb-5 pb-3">
+          <div class="input-group">
+            <input
+              type="text"
+              id="searchInput"
+              class="form-control"
+              placeholder="Hľadať podľa emailu..."
+
+              [ngModel]="search()"
+              (ngModelChange)="search.set($event)"
+
+              name="search"
+              aria-label="Search"
+            />
+          </div>
+        </form>
+
+        <app-table
+          [columns]="clientsColumns"
+          [rows]="filteredClients()"
+        ></app-table>
+      }
+    </div>
+  </div>
+</div>

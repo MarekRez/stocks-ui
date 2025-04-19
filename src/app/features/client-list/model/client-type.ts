@@ -1,7 +1,9 @@
-export type Client = {
+export type ClientModel = {
+  id?: number;
   name: string;
   email: string;
-  iban?: string;
+  role: string;
+  iban: string;
   bankAccountBalance: number;
   investmentAccountBalance: number;
 };
