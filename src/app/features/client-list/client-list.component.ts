@@ -2,9 +2,10 @@ import {Component, computed, effect, inject, OnInit, signal} from '@angular/core
 import {TableComponent} from '../../shared/component/table/table.component';
 import {FormsModule} from '@angular/forms';
 import {Column} from '../../shared/component/table/model/column.type';
-import {ClientModel} from './model/client-type';
+import {ClientModel} from '../../core/model/client-type';
 import {ClientListApiService} from './service/client-list-api.service';
 import {catchError, finalize, of} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-client-list',
@@ -16,6 +17,7 @@ import {catchError, finalize, of} from 'rxjs';
 })
 export class ClientListComponent {
 
+  private router = inject(Router);
   private api = inject(ClientListApiService);
 
   clients    = signal<ClientModel[]|undefined>(undefined);
@@ -86,8 +88,8 @@ export class ClientListComponent {
       });
   }
 
-  // Placeholder handlers
   private editClient(client: ClientModel) {
+    this.router.navigate(['edit-client', client.id]).then();
     console.log('Edit', client);
   }
 

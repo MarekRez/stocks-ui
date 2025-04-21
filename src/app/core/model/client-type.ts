@@ -3,7 +3,7 @@ export type ClientModel = {
   name: string;
   email: string;
   role: string;
-  iban: string;
-  bankAccountBalance: number;
-  investmentAccountBalance: number;
+  iban?: string;
+  bankAccountBalance?: number;
+  investmentAccountBalance?: number;
 };

@@ -14,6 +14,20 @@ export class UserService {
   constructor(private oauthService: OAuthService) {
     this.oauthService.configure(authCodeFlowConfig);
     this.tryLogin();
+
+    this.oauthService.events.subscribe(e => {
+      // console.log('OAuth event:', e.type, e);
+
+      // if (e.type === 'discovery_document_loaded') {
+      //   this.oauthService.loadDiscoveryDocumentAndTryLogin();
+      // }
+      if (e.type === 'token_received') {
+        this.user.set(this.oauthService.getIdentityClaims() as UserModel);
+      }
+      if (e.type === 'logout' || e.type === 'session_terminated' || e.type === 'token_expires') {
+        this.user.set(undefined);
+      }
+    });
   }
 
   getUserSignal() {
@@ -46,7 +60,7 @@ export class UserService {
 
 }
 
-export const canActivateHome: CanActivateFn = async (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+export const canActivate: CanActivateFn = async (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const router = inject(Router);
   const userService = inject(UserService);
 

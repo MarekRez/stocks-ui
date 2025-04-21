@@ -1,1 +1,146 @@
-<p>add-client works!</p>
+<div class="d-flex flex-column min-vh-100">
+  <div class="container mt-5 mb-5 d-flex justify-content-center align-items-center">
+    <div class="card shadow-lg text-bg-secondary p-4" style="max-width:800px;">
+      <h2 class="text-center mb-4">
+        @if (isEdit()) {
+          Upraviť klienta
+        } @else {
+          Pridať klienta
+        }
+      </h2>
+
+      <div class="card-body">
+        @if (isLoading()) {
+          <div class="text-center"> Načítavam </div>
+
+        } @else if (error()) {
+          <div class="alert alert-danger">{{ error() }}</div>
+
+        } @else if (isSending()) {
+          <div class="text-center"> Odosielam ... </div>
+
+        } @else {
+          <form [formGroup]="form" (ngSubmit)="save()">
+            <div class="row">
+              <!-- Name -->
+              <div class="col-md-6">
+                <label class="form-label">Meno Priezvisko</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                  placeholder="Marek Režný"
+                />
+                @if (form.get('name')?.touched && form.get('name')?.invalid) {
+                  <div class="invalid-feedback d-block">
+                    @if (form.get('name')?.hasError('required')) {
+                      Meno je povinné
+                    } @else if (form.get('name')?.hasError('minlength')) {
+                      Meno musí mať aspoň 3 znaky
+                    } @else if (form.get('name')?.hasError('maxlength')) {
+                      Meno môže mať maximálne 20 znakov
+                    }
+                  </div>
+                }
+              </div>
+
+              <!-- Email -->
+              <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  formControlName="email"
+                  placeholder="rezny.marek@gmail.com"
+                />
+                @if (form.get('email')?.touched) {
+                  <div class="invalid-feedback d-block">
+                    @if (form.get('email')?.hasError('required')) {
+                      Email je povinný
+                    } @else if (form.get('email')?.hasError('email')) {
+                      Neplatný formát emailu
+                    } @else if (form.get('email')?.hasError('emailTaken')) {
+                      Tento email už existuje v systéme. Prosím, zadajte iný email.
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <!-- Role -->
+              <div class="col-md-6">
+                <label class="form-label">Rola</label>
+                <select class="form-select" formControlName="role">
+                  <option value=""> Vyber svoju rolu ... </option>
+                  <option value="USER">USER</option>
+                  <option value="ADMIN">ADMIN</option>
+                </select>
+                @if (form.get('role')?.touched && form.get('role')?.invalid) {
+                  <div class="invalid-feedback d-block">
+                    Role is required
+                  </div>
+                }
+              </div>
+
+              <!-- Empty placeholder column for now -->
+              <div class="col-md-6"></div>
+            </div>
+
+            <div class="d-flex justify-content-end mt-4">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="form.invalid || isSending()"
+              >
+                @if (isEdit()) {
+                  Upraviť
+                } @else {
+                  Pridať
+                }
+              </button>
+            </div>
+          </form>
+
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-4">
+    <p class="text-center">
+      Pridanie klienta do systému je dôležitým krokom pre správu ich finančných údajov a investícií.
+      Prosím, uistite sa, že všetky údaje sú presné a aktuálne, aby sme mohli poskytovať tie najlepšie služby.
+      Tento formulár umožňuje rýchle a jednoduché pridanie nového klienta s ich bankovým a investičným zostatkom.
+    </p>
+
+    <p>
+      Po pridaní klienta budete môcť:
+    </p>
+    <ul>
+      <li>Prezerať si zoznam všetkých klientov na stránke <strong>Zoznam Klientov</strong>.</li>
+      <li>Sledovať ich bankový a investičný zostatok v reálnom čase.</li>
+      <li>Spravovať ich údaje a vykonávať aktualizácie podľa potreby.</li>
+      <li>Pridávať alebo vyberať finančné prostriedky z ich účtov.</li>
+    </ul>
+
+    <p>
+      Údaje, ktoré pridáte, budú uložené bezpečne a použité výhradne na správu finančných transakcií.
+      Ak narazíte na problém pri vypĺňaní formulára, kontaktujte podporu na <a
+      href="mailto:support@stocksbymarek.com" class="text-primary fw-bold">support&#64;stocksbymarek.com</a>.
+    </p>
+
+    <h4>Pokyny na vypĺňanie formulára:</h4>
+    <ol>
+      <li>Zadajte celé meno klienta, vrátane všetkých titulov, ak je to potrebné.</li>
+      <li>Vyplňte e-mail klienta, ktorý bude slúžiť ako primárny kontaktný údaj.</li>
+      <li>Do kolonky <strong>Role</strong> zadajte vašu administrátorom pridelenú rolu.</li>
+      <li>Kliknite na tlačidlo <strong>Send</strong>, aby ste pridali klienta do systému.</li>
+    </ol>
+
+    <p>
+      Veríme, že tento systém vám umožní spravovať klientov efektívnejšie a s lepším prehľadom.
+      Ak máte akékoľvek návrhy na zlepšenie, neváhajte nás kontaktovať. Sme tu, aby sme vám pomohli!
+    </p>
+  </div>
+</div>

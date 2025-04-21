@@ -6,17 +6,21 @@ import {ClientModel} from '../../../core/model/client-type';
 @Injectable({
   providedIn: 'root'
 })
-export class ClientListApiService {
+export class ClientCreateEditService {
 
   private http = inject(HttpClient);
   private base = environment.Url + '/users';
 
-  getAllClients() {
-    return this.http.get<ClientModel[]>(this.base);
+  createClient(client: ClientModel) {
+    return this.http.post<ClientModel>(this.base, client);
   }
 
-  deleteClient(id: number) {
-    return this.http.delete<void>(`${this.base}/${id}`);
+  updateClient(client: ClientModel) {
+    return this.http.put<ClientModel>(`${this.base}/${client.id}`, client);
+  }
+
+  getClientById(id: number) {
+    return this.http.get<ClientModel>(`${this.base}/${id}`);
   }
 
 }
