@@ -11,7 +11,11 @@
 
       <div class="card-body">
         @if (isLoading()) {
-          <div class="text-center"> Načítavam </div>
+          <div class="text-center">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Načítavam...</span>
+            </div>
+          </div>
 
         } @else if (error()) {
           <div class="alert alert-danger">{{ error() }}</div>
@@ -83,8 +87,34 @@
                 }
               </div>
 
-              <!-- Empty placeholder column for now -->
-              <div class="col-md-6"></div>
+              <!-- Bank Account -->
+              @if (isEdit()) {
+
+                <div class="col-md-6">
+
+                <label class="form-label">Bankový zostatok</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="bankAccountBalance"
+                  placeholder="10000"
+                  min="0"
+                  max="100000"
+                  step="1000"
+                />
+                @if (form.get('bankAccountBalance')?.touched) {
+                  <div class="invalid-feedback d-block">
+                    @if (form.get('bankAccountBalance')?.hasError('required')) {
+                      Bankový zostatok je povinný
+                    } @else if (form.get('bankAccountBalance')?.hasError('min')) {
+                      Bankový zostatok musí byť väčší ako 0
+                    } @else if (form.get('bankAccountBalance')?.hasError('max')) {
+                      Bankový zostatok môže byť maximálne 100 000
+                    }
+                  </div>
+                }
+              </div>
+              }
             </div>
 
             <div class="d-flex justify-content-end mt-4">

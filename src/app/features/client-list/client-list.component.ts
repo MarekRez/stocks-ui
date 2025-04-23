@@ -1,4 +1,4 @@
-import {Component, computed, effect, inject, OnInit, signal} from '@angular/core';
+import {Component, computed, effect, inject, signal} from '@angular/core';
 import {TableComponent} from '../../shared/component/table/table.component';
 import {FormsModule} from '@angular/forms';
 import {Column} from '../../shared/component/table/model/column.type';

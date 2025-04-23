@@ -1,6 +1,5 @@
 import {Component, computed, inject, signal, effect} from '@angular/core';
 import {AbstractControl, FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
-import {NgClass} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ClientCreateEditService} from './service/client-create-edit.service';
 import {ClientModel} from '../../core/model/client-type';
@@ -22,21 +21,22 @@ export class AddClientComponent {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
 
-  // 1) Route ID signal (null = create mode; number = edit mode)
+  // Route ID signal (null = create mode; number = edit mode)
   private idSignal = toSignal(
     this.route.paramMap.pipe(map(pm => pm.get('id') ? Number(pm.get('id')) : null)),
     {initialValue: null}
   );
+
   isEdit = computed(() => this.idSignal() !== null);
 
-  // 2) Loading & error signals for the “fetch existing client” step
   isLoading = signal(false);
+  isSending = signal(false);
   error = signal<string | null>(null);
 
-  // 3) Client signal: holds the fetched client when editing
+  // holds the fetched client when editing
   client = signal<ClientModel | null>(null);
 
-  // 4) Kick off a fetch if in edit mode
+  // fetch client if in edit mode
   constructor() {
     effect(() => {
       const id = this.idSignal();
@@ -54,26 +54,29 @@ export class AddClientComponent {
       }
     });
 
+  // Patch the form with the client data when available
     effect(() => {
       const c = this.client();
       if (c) {
         this.form.patchValue({
           name: c.name,
           email: c.email,
-          role: c.role
+          role: c.role,
+          bankAccountBalance: c.bankAccountBalance
         });
       }
     })
   }
 
-  // 5) Build the reactive form, patching in the client’s data when available
+  // Build the reactive form
   form = this.fb.group({
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email], [this.emailTakenValidator.bind(this)]],
-    role: ['', Validators.required]
+    role: ['', Validators.required],
+    bankAccountBalance: [0, Validators.required],
   });
 
-  // 6) Async validator for email uniqueness
+  // Async validator for email uniqueness
   private emailTakenValidator(ctrl: AbstractControl) {
     const val = ctrl.value as string;
     return this.listApi.getAllClients().pipe(
@@ -86,10 +89,7 @@ export class AddClientComponent {
     );
   }
 
-// 7) Sending flag for the create/update call
-  isSending = signal(false);
-
-// 8) Submit handler
+// Submit
   save() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -97,10 +97,11 @@ export class AddClientComponent {
     }
 
     const payload: ClientModel = {
-      id:               this.idSignal() ?? undefined,
-      name:             this.form.value.name!,
-      email:            this.form.value.email!,
-      role:             this.form.value.role!,
+      id:                   this.idSignal() ?? undefined,
+      name:                 this.form.value.name!,
+      email:                this.form.value.email!,
+      role:                 this.form.value.role!,
+      bankAccountBalance:   this.form.value.bankAccountBalance!,
     };
 
     this.isSending.set(true);

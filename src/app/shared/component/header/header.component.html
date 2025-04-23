@@ -49,14 +49,17 @@
         </button>
       }
 
-<!--      <div class="d-flex ms-auto">-->
-<!--        <button class="btn btn-primary btn-outline-dark"-->
-<!--                (click)="toggleTheme()"-->
-<!--                id="themeToggle"-->
-<!--                title="Switch light mode vs dark mode!">-->
-<!--          Switch Mode-->
-<!--        </button>-->
-<!--      </div>-->
+      <div class="d-flex ms-auto">
+        <button (click)="themeService.toggle()"
+                class="btn btn-primary btn-outline-dark"
+                aria-label="Toggle dark/light mode">
+          @if (themeService.theme() === 'dark') {
+            🌞 Light
+          } @else {
+            🌙 Dark
+          }
+        </button>
+      </div>
 
     </div>
   </div>

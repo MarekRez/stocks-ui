@@ -4,6 +4,7 @@ import {RouterLink, RouterLinkActive} from '@angular/router';
 import {NgOptimizedImage} from '@angular/common';
 import {UserService} from '../../../core/service/user.service';
 import {NgbDropdown, NgbDropdownMenu, NgbDropdownToggle} from '@ng-bootstrap/ng-bootstrap';
+import {ThemeService} from '../../../core/service/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -23,6 +24,7 @@ export class HeaderComponent {
   menuItems = MENU_ITEMS;
 
   userService = inject(UserService);
+  themeService = inject(ThemeService);
 
   user = this.userService.getUserSignal();
 
