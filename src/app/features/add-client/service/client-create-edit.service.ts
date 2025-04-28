@@ -15,6 +15,7 @@ export class ClientCreateEditService {
     return this.http.post<ClientModel>(this.base, client);
   }
 
+  //fixme: this resets the investment account balance to 0
   updateClient(client: ClientModel) {
     return this.http.put<ClientModel>(`${this.base}/${client.id}`, client);
   }

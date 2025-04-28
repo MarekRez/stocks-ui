@@ -1,1 +1,212 @@
-<p>accounts works!</p>
+<div class="d-flex flex-column min-vh-100">
+  <div class="container mt-5 d-flex justify-content-center align-items-center">
+    <div class="card shadow-lg text-bg-secondary p-4 w-100" style="max-width:800px;">
+      @if (isLoadingUser()) {
+        <div class="text-center py-3">Loading account…</div>
+
+      } @else if (backendUserError()) {
+        <div class="alert alert-danger">{{ backendUserError() }}</div>
+
+      } @else {
+      <div class="card-body">
+        <h2 class="text-center mb-5 text-black fw-bold">Bankový a Investičný Účet</h2>
+
+        <div class="row">
+          <!-- Bank Account -->
+          <div class="col-md-6">
+
+            <h4 class="text-center text-primary">Bankový Účet</h4>
+
+            @if (bankError()) {
+              <div class="alert alert-danger">{{ bankError() }}</div>
+            } @else if (bankSuccess()) {
+              <div class="alert alert-success">{{ bankSuccess() }}</div>
+            }
+
+            <form [formGroup]="bankAccountForm">
+              <div class="mb-3">
+                <label class="form-label">Suma (€)</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="amount"
+                  placeholder="Zadajte sumu"
+                  step="1000"
+                  min="0"
+
+                />
+                @if (bankAccountForm.get('amount')?.touched && bankAccountForm.get('amount')?.hasError('min')) {
+                  <div class="text-danger">Suma musí byť kladná.</div>
+                }
+              </div>
+
+              <div class="d-flex justify-content-between">
+                <button
+                  type="button"
+                  class="btn btn-info"
+                  (click)="depositToBank()"
+                  [disabled]="bankAccountForm.invalid || isBankLoading()"
+                >
+                  @if (isBankLoading()) {
+                    Načítavam…
+                  } @else {
+                    Vklad
+                  }
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="withdrawFromBank()"
+                  [disabled]="bankAccountForm.invalid || isBankLoading()"
+                >
+                  @if (isBankLoading()) {
+                    Načítavam…
+                  } @else {
+                    Výber
+                  }
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Investment Account -->
+          <div class="col-md-6">
+
+            <h4 class="text-center text-primary">Investičný Účet</h4>
+
+            @if (investError()) {
+              <div class="alert alert-danger">{{ investError() }}</div>
+            } @else if (investSuccess()) {
+              <div class="alert alert-success">{{ investSuccess() }}</div>
+            }
+
+            <form [formGroup]="investmentAccountForm">
+              <div class="mb-3">
+                <label class="form-label">Suma (€)</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="amount"
+                  placeholder="Zadajte sumu"
+                  step="1000"
+                  min="0"
+                />
+                @if (investmentAccountForm.get('amount')?.touched && investmentAccountForm.get('amount')?.hasError('min')) {
+                  <div class="text-danger">Suma musí byť aspoň 1 €.</div>
+                }
+              </div>
+
+              <div class="d-flex justify-content-between">
+                <button
+                  type="button"
+                  class="btn btn-info"
+                  (click)="depositToInvestment()"
+                  [disabled]="investmentAccountForm.invalid || isInvestLoading()"
+                >
+                  @if (isInvestLoading()) {
+                    Načítavam…
+                  } @else {
+                    Vklad
+                  }
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="withdrawFromInvestment()"
+                  [disabled]="investmentAccountForm.invalid || isInvestLoading()"
+                >
+                  @if (isInvestLoading()) {
+                    Načítavam…
+                  } @else {
+                    Výber
+                  }
+                </button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+
+  <div class="container mt-5">
+    <div class="mt-4">
+      <h3>Správa Účtov</h3>
+      <p>
+        Bankové účty a investičné účty sú základom vášho finančného portfólia. Prostredníctvom tejto stránky
+        môžete jednoducho pridávať finančné prostriedky, vykonávať výbery a sledovať pohyby na vašich účtoch.
+        Udržujte si prehľad o svojich financiách.
+      </p>
+
+      <h3>Bankové Účty</h3>
+      <p>
+        Bankové účty slúžia na správu vašich každodenných financií. Umožňujú vám vkladať, vyberať a spravovať
+        prostriedky. Zabezpečujeme najvyššiu úroveň zabezpečenia a jednoduché rozhranie pre maximálne pohodlie.
+      </p>
+
+      <h3>Investičné Účty</h3>
+      <p>
+        Investičné účty sú určené pre dlhodobé ciele a budovanie majetku. Môžete ich použiť na investovanie
+        do akcií, dlhopisov alebo iných finančných nástrojov. Sledovanie výkonnosti vašich investícií nebolo nikdy
+        jednoduchšie!
+      </p>
+      <h3>Prečo spravovať svoje účty na jednom mieste?</h3>
+      <p>
+        Centralizácia vašich bankových a investičných účtov vám umožňuje jednoduchší prístup k financiám, rýchlejšie rozhodovanie a lepší prehľad o výkonnosti vašich investícií. Naše rozhranie ponúka užívateľsky prívetivú navigáciu, kde môžete jednoducho sledovať, analyzovať a optimalizovať svoje finančné prostriedky.
+      </p>
+
+      <h3>Výhody správy bankových účtov</h3>
+      <p>
+        Bankové účty slúžia ako základ vášho finančného života. Vďaka našim nástrojom môžete:
+      <ul>
+        <li>Sledovať aktuálny zostatok v reálnom čase</li>
+        <li>Rýchlo pridávať alebo vyberať prostriedky</li>
+        <li>Generovať prehľady o transakciách</li>
+        <li>Plánovať rozpočet pomocou integrovaných funkcií</li>
+      </ul>
+      Udržiavajte svoje financie bezpečné a organizované.
+      <h3>Výhody správy investičných účtov</h3>
+      <p>
+        Investovanie je kľúčom k budovaniu bohatstva a finančnej nezávislosti. Spravujte svoje investičné účty efektívne:
+      <ul>
+        <li>Monitorujte výkonnosť svojich akcií a ETF</li>
+        <li>Analyzujte riziká pomocou grafov a štatistík</li>
+        <li>Jednoducho pridávajte nové investície</li>
+        <li>Predávajte svoje aktíva, keď je to výhodné</li>
+      </ul>
+      Zlepšite svoju investičnú stratégiu s našou platformou.
+      <h3>Bezpečnosť vašich účtov</h3>
+      <p>
+        Vaša bezpečnosť je našou prioritou. Používame najmodernejšie šifrovacie technológie, aby sme zabezpečili vaše údaje. Každá transakcia je overovaná a auditovaná, aby sa minimalizovali akékoľvek riziká.
+      </p>
+
+      <h3>Časté otázky</h3>
+      <p>
+        <b>1. Ako môžem pridať finančné prostriedky na svoj účet?</b><br>
+        Pre pridanie prostriedkov jednoducho použite tlačidlo "Pridať finančné prostriedky" v sekcii vášho účtu. Budete presmerovaný na bezpečnú stránku pre transakciu.
+      </p>
+      <p>
+        <b>2. Ako môžem vykonať výber?</b><br>
+        Výbery sú rovnako jednoduché – prejdite do sekcie výberov, zadajte požadovanú sumu a potvrďte operáciu.
+      </p>
+      <p>
+        <b>3. Aké typy investícií sú podporované?</b><br>
+        Na našej platforme môžete investovať do akcií, ETF, dlhopisov a ďalších finančných nástrojov.
+      </p>
+
+      <h3>Podpora zákazníkov</h3>
+      <p>
+        Máte otázky alebo potrebujete pomoc? Naša zákaznícka podpora je tu pre vás 24/7. Kontaktujte nás prostredníctvom chatu, e-mailu alebo telefonicky. Náš tím je pripravený pomôcť vám s akýmkoľvek problémom.
+      </p>
+    </div>
+  </div>
+
+  <div>
+    <h3 class="text-center mt-5 mb-5">Ďakujeme, že používate StocksByMarek!</h3>
+
+  </div>
+</div>

@@ -73,7 +73,7 @@ export class AddClientComponent {
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email], [this.emailTakenValidator.bind(this)]],
     role: ['', Validators.required],
-    bankAccountBalance: [0, Validators.required],
+    bankAccountBalance: [10000, Validators.required],
   });
 
   // Async validator for email uniqueness
@@ -102,6 +102,7 @@ export class AddClientComponent {
       email:                this.form.value.email!,
       role:                 this.form.value.role!,
       bankAccountBalance:   this.form.value.bankAccountBalance!,
+      investmentAccountBalance: 0,
     };
 
     this.isSending.set(true);

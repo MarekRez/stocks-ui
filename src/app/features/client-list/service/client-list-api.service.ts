@@ -19,4 +19,8 @@ export class ClientListApiService {
     return this.http.delete<void>(`${this.base}/${id}`);
   }
 
+  getClientByEmail(email: string) {
+    return this.http.get<ClientModel>(`${this.base}/by-email/${encodeURIComponent(email)}`);
+  }
+
 }
