@@ -9,7 +9,7 @@ import {ClientModel} from '../../../core/model/client-type';
 export class ClientCreateEditService {
 
   private http = inject(HttpClient);
-  private base = environment.Url + '/users';
+  private base = environment.beUrl + '/users';
 
   createClient(client: ClientModel) {
     return this.http.post<ClientModel>(this.base, client);

@@ -9,7 +9,7 @@ import {ClientModel} from '../../../core/model/client-type';
 export class ClientListApiService {
 
   private http = inject(HttpClient);
-  private base = environment.Url + '/users';
+  private base = environment.beUrl + '/users';
 
   getAllClients() {
     return this.http.get<ClientModel[]>(this.base);
