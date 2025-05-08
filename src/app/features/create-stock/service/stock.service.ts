@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../../environments/environment-prod';
+import {environment} from '../../../../environments/environment.prod';
 import {StockModel} from '../model/stock-model';
 
 @Injectable({
@@ -15,4 +15,9 @@ export class StockService {
     return this.http.post<StockModel>(this.base, stock);
   }
 
+  listStocks() {
+    return this.http.get<StockModel[]>(this.base);
+  }
+
 }
+

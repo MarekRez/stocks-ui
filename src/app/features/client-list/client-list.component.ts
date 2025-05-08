@@ -3,7 +3,7 @@ import {TableComponent} from '../../shared/component/table/table.component';
 import {FormsModule} from '@angular/forms';
 import {Column} from '../../shared/component/table/model/column.type';
 import {ClientModel} from '../../core/model/client-type';
-import {ClientListApiService} from './service/client-list-api.service';
+import {ClientListService} from './service/client-list.service';
 import {catchError, finalize, of} from 'rxjs';
 import {Router} from '@angular/router';
 
@@ -18,12 +18,11 @@ import {Router} from '@angular/router';
 export class ClientListComponent {
 
   private router = inject(Router);
-  private api = inject(ClientListApiService);
+  private api = inject(ClientListService);
 
   clients    = signal<ClientModel[]|undefined>(undefined);
 
   error = signal<string | null>(null);
-  // Loading computed: true if still `undefined`
   isLoading  = signal(true);
   isDeleting = signal(false);
 

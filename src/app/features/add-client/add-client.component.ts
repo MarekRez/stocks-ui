@@ -3,7 +3,7 @@ import {AbstractControl, FormBuilder, ReactiveFormsModule, Validators} from '@an
 import {ActivatedRoute, Router} from '@angular/router';
 import {ClientCreateEditService} from './service/client-create-edit.service';
 import {ClientModel} from '../../core/model/client-type';
-import {ClientListApiService} from '../client-list/service/client-list-api.service';
+import {ClientListService} from '../client-list/service/client-list.service';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {catchError, finalize, map, of, take} from 'rxjs';
 
@@ -17,7 +17,7 @@ import {catchError, finalize, map, of, take} from 'rxjs';
 export class AddClientComponent {
   private fb = inject(FormBuilder);
   private api = inject(ClientCreateEditService);
-  private listApi = inject(ClientListApiService);
+  private listApi = inject(ClientListService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
 

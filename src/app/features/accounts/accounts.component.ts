@@ -2,7 +2,7 @@ import {Component, effect, inject, signal} from '@angular/core';
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AccountService} from './service/account.service';
 import {UserService} from '../../core/service/user.service';
-import {ClientListApiService} from '../client-list/service/client-list-api.service';
+import {ClientListService} from '../client-list/service/client-list.service';
 import {ClientModel} from '../../core/model/client-type';
 import {finalize} from 'rxjs';
 
@@ -16,7 +16,7 @@ import {finalize} from 'rxjs';
 export class AccountsComponent {
 
   private userService   = inject(UserService);
-  private clientApi     = inject(ClientListApiService);
+  private clientApi     = inject(ClientListService);
   private accountService = inject(AccountService);
   private formBuilder = inject(FormBuilder);
 

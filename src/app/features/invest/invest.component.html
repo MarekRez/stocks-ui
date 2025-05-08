@@ -1,1 +1,70 @@
-<p>invest works!</p>
+<!--.................................................................................................................-->
+<div class="position-relative p-3">
+  <!-- toasts -->
+  <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index:1100;">
+    @if (txSuccess()) {
+      <div class="toast show text-white bg-success border-0 mb-2">
+        <div class="toast-body d-flex align-items-center">
+          {{ txSuccess() }}
+          <button class="btn-close btn-close-white ms-auto" (click)="txSuccess.set(null)"></button>
+        </div>
+      </div>
+    }
+    @if (txError()) {
+      <div class="toast show text-white bg-danger border-0 mb-2">
+        <div class="toast-body d-flex align-items-center">
+          {{ txError() }}
+          <button class="btn-close btn-close-white ms-auto" (click)="txError.set(null)"></button>
+        </div>
+      </div>
+    }
+  </div>
+
+
+  <div class="container mt-5 mb-5 d-flex border-0 justify-content-center align-items-center">
+    <div class="card shadow-lg text-bg-secondary p-4 w-100" style="max-width: 1100px;">
+      <div class="card-body">
+
+        @if (isTxLoading()) {
+          <div class="text-center mt-5">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <p>Loading, please wait...</p>
+          </div>
+        } @else {
+
+        <div class="row g-4">
+          <!-- Available Stocks -->
+          <div class="col-md-6">
+            <h4 class="text-center text-black fw-bold mb-3">Dostupné Akcie</h4>
+            @if (stocks().length === 0) {
+              <p class="text-center">Loading stocks…</p>
+            } @else {
+              <app-table
+                [columns]="stockCols"
+                [rows]="stocks()"
+              ></app-table>
+            }
+          </div>
+
+          <!-- My Portfolio -->
+          <div class="col-md-6">
+            <h4 class="text-center text-black fw-bold mb-3">Moje Portfólio</h4>
+            @if (holdings().length === 0) {
+              <p class="text-center">No holdings.</p>
+            } @else {
+              <app-table
+                [columns]="holdingCols"
+                [rows]="holdingsView()"
+              ></app-table>
+            }
+          </div>
+
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -3,7 +3,7 @@
     <thead>
     <tr>
       @for (column of columns(); track $index) {
-        <th scope="col">{{column.label}}</th>
+        <th scope="col" [width]="column.width">{{column.label}}</th>
       }
     </tr>
     </thead>
@@ -21,7 +21,7 @@
 
               } @else if (column.text === 'Odstrániť') {
                 <span
-                  (click)="column?.onClick ? column?.onClick(row) : null"
+                  (click)="column.onClick ? column.onClick(row) : null"
                   class="btn btn-danger text-white btn-sm"
                   style="cursor: pointer;"
                 >
@@ -30,8 +30,24 @@
 
               } @else if (column.text === 'Upraviť') {
                 <span
-                  (click)="column?.onClick ? column?.onClick(row) : null"
+                  (click)="column.onClick?.(row)"
                   class="btn btn-dark text-white btn-sm"
+                  style="cursor: pointer;"
+                >
+              {{ column.text }}
+            </span>
+              } @else if (column.text === 'Kúpiť') {
+                <span
+                  (click)="column.onClick?.(row)"
+                  class="btn btn-success text-white btn-sm"
+                  style="cursor: pointer;"
+                >
+              {{ column.text }}
+            </span>
+              } @else if (column.text === 'Predať') {
+                <span
+                  (click)="column.onClick?.(row)"
+                  class="btn btn-danger text-white btn-sm"
                   style="cursor: pointer;"
                 >
               {{ column.text }}

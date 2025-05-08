@@ -1,7 +1,7 @@
 <div class="d-flex flex-column min-vh-100">
   <div class="container mt-5 mb-5 d-flex justify-content-center align-items-center">
     <div class="card shadow-lg text-bg-secondary p-4" style="max-width:800px;">
-      <h2 class="text-center mb-4">
+      <h2 class="text-center text-black fw-bold mb-4">
         @if (isEdit()) {
           Upraviť klienta
         } @else {
@@ -50,7 +50,7 @@
 
               <!-- Email -->
               <div class="col-md-6">
-                <label class="form-label"> Keycloak Email </label>
+                <label class="form-label"> KeyCloak Email </label>
                 <input
                   type="email"
                   class="form-control"
@@ -74,7 +74,7 @@
             <div class="row mt-3">
               <!-- Role -->
               <div class="col-md-6">
-                <label class="form-label"> Keycloak Rola </label>
+                <label class="form-label"> KeyCloak Rola </label>
                 <select class="form-select" formControlName="role">
                   <option value=""> Vyber svoju rolu ... </option>
                   <option value="USER">USER</option>
@@ -120,7 +120,7 @@
             <div class="d-flex justify-content-end mt-4">
               <button
                 type="submit"
-                class="btn btn-primary"
+                class="btn btn-info"
                 [disabled]="form.invalid || isSending()"
               >
                 @if (isEdit()) {
