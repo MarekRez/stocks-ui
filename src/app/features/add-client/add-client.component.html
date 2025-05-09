@@ -28,7 +28,7 @@
             <div class="row">
               <!-- Name -->
               <div class="col-md-6">
-                <label class="form-label">Meno Priezvisko</label>
+                <label class="form-label">Používateľské meno</label>
                 <input
                   type="text"
                   class="form-control"
@@ -37,11 +37,11 @@
                 />
                 @if (form.get('name')?.touched && form.get('name')?.invalid) {
                   <div class="invalid-feedback d-block">
-                    @if (form.get('name')?.hasError('required')) {
+                    @if (form.get('name')!.hasError('required')) {
                       Meno je povinné
-                    } @else if (form.get('name')?.hasError('minlength')) {
+                    } @else if (form.get('name')!.hasError('minlength')) {
                       Meno musí mať aspoň 3 znaky
-                    } @else if (form.get('name')?.hasError('maxlength')) {
+                    } @else if (form.get('name')!.hasError('maxlength')) {
                       Meno môže mať maximálne 20 znakov
                     }
                   </div>
@@ -59,11 +59,11 @@
                 />
                 @if (form.get('email')?.touched) {
                   <div class="invalid-feedback d-block">
-                    @if (form.get('email')?.hasError('required')) {
+                    @if (form.get('email')!.hasError('required')) {
                       Email je povinný
-                    } @else if (form.get('email')?.hasError('email')) {
+                    } @else if (form.get('email')!.hasError('email')) {
                       Neplatný formát emailu
-                    } @else if (form.get('email')?.hasError('emailTaken')) {
+                    } @else if (form.get('email')!.hasError('emailTaken')) {
                       Tento email už existuje v systéme. Prosím, zadajte iný email.
                     }
                   </div>
@@ -104,11 +104,11 @@
                 />
                 @if (form.get('bankAccountBalance')?.touched) {
                   <div class="invalid-feedback d-block">
-                    @if (form.get('bankAccountBalance')?.hasError('required')) {
+                    @if (form.get('bankAccountBalance')!.hasError('required')) {
                       Bankový zostatok je povinný
-                    } @else if (form.get('bankAccountBalance')?.hasError('min')) {
+                    } @else if (form.get('bankAccountBalance')!.hasError('min')) {
                       Bankový zostatok musí byť väčší ako 0
-                    } @else if (form.get('bankAccountBalance')?.hasError('max')) {
+                    } @else if (form.get('bankAccountBalance')!.hasError('max')) {
                       Bankový zostatok môže byť maximálne 100 000
                     }
                   </div>

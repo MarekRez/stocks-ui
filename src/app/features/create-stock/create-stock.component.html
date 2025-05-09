@@ -63,9 +63,9 @@
                      step="100" />
               @if (stockForm.get('currentPrice')?.touched && stockForm.get('currentPrice')?.invalid) {
                 <div class="invalid-feedback d-block">
-                  @if (stockForm.get('currentPrice')?.hasError('required')) {
+                  @if (stockForm.get('currentPrice')!.hasError('required')) {
                     Price is required.
-                  } @else if (stockForm.get('currentPrice')?.hasError('min')) {
+                  } @else if (stockForm.get('currentPrice')!.hasError('min')) {
                     Must be at least 0.01.
                   }
                 </div>
@@ -81,7 +81,7 @@
                      min="0" max="1" step="0.01" />
               @if (stockForm.get('dividendYield')?.touched && stockForm.get('dividendYield')?.invalid) {
                 <div class="invalid-feedback d-block">
-                  @if (stockForm.get('dividendYield')?.hasError('required')) {
+                  @if (stockForm.get('dividendYield')!.hasError('required')) {
                     Required.
                   } @else {
                     Must be between 0 and 1.
@@ -99,7 +99,7 @@
                      min="0" max="1" step="0.01" />
               @if (stockForm.get('volatility')?.touched && stockForm.get('volatility')?.invalid) {
                 <div class="invalid-feedback d-block">
-                  @if (stockForm.get('volatility')?.hasError('required')) {
+                  @if (stockForm.get('volatility')!.hasError('required')) {
                     Required.
                   } @else {
                     Must be between 0 and 1.
@@ -117,7 +117,7 @@
                      min="0" max="1" step="0.01" />
               @if (stockForm.get('expectedReturn')?.touched && stockForm.get('expectedReturn')?.invalid) {
                 <div class="invalid-feedback d-block">
-                  @if (stockForm.get('expectedReturn')?.hasError('required')) {
+                  @if (stockForm.get('expectedReturn')!.hasError('required')) {
                     Required.
                   } @else {
                     Must be between 0 and 1.

@@ -35,7 +35,7 @@
                   min="0"
 
                 />
-                @if (bankAccountForm.get('amount')?.touched && bankAccountForm.get('amount')?.hasError('min')) {
+                @if (bankAccountForm.get('amount')?.touched && bankAccountForm.get('amount')!.hasError('min')) {
                   <div class="text-danger">Suma musí byť kladná.</div>
                 }
               </div>
@@ -92,7 +92,7 @@
                   step="1000"
                   min="0"
                 />
-                @if (investmentAccountForm.get('amount')?.touched && investmentAccountForm.get('amount')?.hasError('min')) {
+                @if (investmentAccountForm.get('amount')?.touched && investmentAccountForm.get('amount')!.hasError('min')) {
                   <div class="text-danger">Suma musí byť aspoň 1 €.</div>
                 }
               </div>
