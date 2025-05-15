@@ -43,7 +43,8 @@ export const routes: Routes = [
   {
     path: 'accounts',
     loadComponent: () => import('./features/accounts/accounts.component')
-      .then(m => m.AccountsComponent)
+      .then(m => m.AccountsComponent),
+    canActivate: [canActivate]
   },
   {
     path: 'portfolio',
@@ -60,10 +61,17 @@ export const routes: Routes = [
       .then(m => m.CreateStockComponent)
   },
   {
+    path: 'transactions',
+    loadComponent: () => import('./features/transactions/transactions.component')
+      .then(m => m.TransactionsComponent),
+    canActivate: [canActivate]
+  },
+  {
     path: '', redirectTo: 'home', pathMatch: 'full'
   },
   {
     path: '**', loadComponent: () => import('./features/not-found/not-found.component')
       .then(m => m.NotFoundComponent)
-  }
+  },
+
 ];

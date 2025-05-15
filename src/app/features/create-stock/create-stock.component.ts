@@ -24,10 +24,10 @@ export class CreateStockComponent {
   stockForm: FormGroup = this.formBuilder.group({
     symbol: ['', Validators.required],
     currency: ['EUR', Validators.required],
-    currentPrice: [100, [Validators.required]],
-    volatility: [0.3, [Validators.min(0), Validators.max(1)]],
-    dividendYield: [0.4, [Validators.min(0), Validators.max(1)]],
-    expectedReturn: [0.5, [Validators.min(0), Validators.max(1)]],
+    currentPrice: [250, [Validators.required]],
+    volatility: [0.80, [Validators.min(0), Validators.max(1)]],
+    dividendYield: [0.03, [Validators.min(0), Validators.max(1)]],
+    expectedReturn: [0.4206, [Validators.min(0), Validators.max(1)]],
   },{ updateOn: 'blur' });
 
   createStock() {

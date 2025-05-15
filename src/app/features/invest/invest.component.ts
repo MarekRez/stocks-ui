@@ -117,8 +117,8 @@ export class InvestComponent {
   holdingsView = computed<HoldingViewHelper[]>(() =>
     this.holdings().map(h => ({
       symbol:     h.stock.symbol,
-      sharesOwned:     +h.sharesOwned.toFixed(2),
-      totalValue: +(h.stock.currentPrice * h.sharesOwned).toFixed(2) // I use + to convert to number
+      sharesOwned:     +h.sharesOwned,
+      totalValue: +(h.stock.currentPrice * h.sharesOwned) // I use + to convert to number
     }))
   );
   //

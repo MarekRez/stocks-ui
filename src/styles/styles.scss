@@ -3,39 +3,79 @@
 
 // Override Bootstrap variables
 $font-family-base: "Electrolize", sans-serif;
-$body-bg: #f1f1f1;
 
+$primary: #006be6;
+
+// BACKGROUND
+$body-bg: #f1f1f1;
+//8cb3ef
+@keyframes gradientShift {
+  0% { background-position: 0 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+/*
+Light mode styles
+*/
+[data-bs-theme="light"] body {
+  //background: linear-gradient(270deg, #f1f1f1, #b6ccf6, #f1f1f1);
+  background-size: 300% 300%;
+  animation: gradientShift 20s ease infinite;
+}
+
+ /*
+ Dark mode styles
+ */
+[data-bs-theme="dark"] body {
+  background: linear-gradient(270deg, #000000, rgb(0, 4, 21), #000000);
+  background-size: 300% 300%;
+  animation: gradientShift 10s ease infinite;
+}
+// BACKGROUND END
+
+.btn-primary {
+  &:hover {
+    --bs-btn-bg: darken($primary, 95%);
+    --bs-btn-border-color: darken($primary, 95%);
+  }
+}
+
+
+[data-bs-theme="dark"] {
+  .navbar {
+    .nav-link {
+      color: rgba(12, 12, 12, 0.77);
+
+      &:hover
+      {
+        color: #000000 ;
+      }
+    }
+  }
+}
 // NAVBAR
+
 $navbar-brand-font-size: 1.5rem;
 .navbar .nav-link {
   font-weight: bold !important;
 }
 
 $navbar-light-active-color: #006be6;
+$navbar-dark-active-color: #006be6;
+
 // NAVBAR END
 //$color:#cfe2ff;
 
-[data-bs-theme="dark"] .card {
-  background-color: #26406e !important;
-}
-
-[data-bs-theme="dark"] {
-  .navbar {
-    .nav-link {
-      color: rgb(255, 255, 255) !important;
-
-      &:hover,
-      &:focus {
-        color: #ffffff !important;
-      }
-    }
-  }
-}
 
 // CARD
 $card-border-color: #105da8;
 $card-border-radius: 10px; // Rounded corners
 $card-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+[data-bs-theme="dark"] .card {
+  background-color: #0c1b39 !important;
+}
 // CARD END
 
 // TABLE

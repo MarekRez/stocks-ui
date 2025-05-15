@@ -59,7 +59,7 @@ export class AddClientComponent {
       const c = this.client();
       if (c) {
         this.form.patchValue({
-          name: c.name,
+          username: c.username,
           email: c.email,
           role: c.role,
           bankAccountBalance: c.bankAccountBalance
@@ -70,7 +70,7 @@ export class AddClientComponent {
 
   // Build the reactive form
   form = this.fb.group({
-    name: ['', Validators.required],
+    username: ['', Validators.required],
     email: ['', [Validators.required, Validators.email], [this.emailTakenValidator.bind(this)]],
     role: ['', Validators.required],
     bankAccountBalance: [10000, Validators.required],
@@ -98,7 +98,7 @@ export class AddClientComponent {
 
     const payload: ClientModel = {
       id:                   this.idSignal() ?? undefined,
-      name:                 this.form.value.name!,
+      username:                 this.form.value.username!,
       email:                this.form.value.email!,
       role:                 this.form.value.role!,
       bankAccountBalance:   this.form.value.bankAccountBalance!,

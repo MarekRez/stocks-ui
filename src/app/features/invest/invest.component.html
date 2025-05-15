@@ -37,9 +37,9 @@
         <div class="row g-4">
           <!-- Available Stocks -->
           <div class="col-md-6">
-            <h4 class="text-center text-black fw-bold mb-3">Dostupné Akcie</h4>
+            <h3 class="text-center text-black fw-bold mb-3">Dostupné Akcie</h3>
             @if (stocks().length === 0) {
-              <p class="text-center">Loading stocks…</p>
+              <p class="text-center">No stocks...</p>
             } @else {
               <app-table
                 [columns]="stockCols"
@@ -50,9 +50,9 @@
 
           <!-- My Portfolio -->
           <div class="col-md-6">
-            <h4 class="text-center text-black fw-bold mb-3">Moje Portfólio</h4>
+            <h3 class="text-center text-black fw-bold mb-3">Moje Portfólio</h3>
             @if (holdings().length === 0) {
-              <p class="text-center">No holdings.</p>
+              <p class="text-center">No holdings...</p>
             } @else {
               <app-table
                 [columns]="holdingCols"

@@ -15,9 +15,12 @@
             <td class="text-center align-middle">
 
               @if (column.attribute) {
-                <span>
-              {{ row[column.attribute] }}
-            </span>
+
+                @if (typeof row[column.attribute] === 'number' && column.attribute !== 'id') {
+                  {{ Number(row[column.attribute]) | number:'1.2-2' }}
+                 } @else {
+                  {{ row[column.attribute] }}
+                }
 
               } @else if (column.text === 'Odstrániť') {
                 <span

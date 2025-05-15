@@ -55,7 +55,7 @@ export class ClientListComponent {
 
   // Table columns
   clientsColumns: Column<ClientModel>[] = [
-    { label: 'Meno',                 attribute: 'name' },
+    { label: 'Meno',                 attribute: 'username' },
     { label: 'Email',                attribute: 'email' },
     { label: 'Role',                attribute: 'role' },
     { label: 'IBAN',                 attribute: 'iban' },
@@ -66,7 +66,7 @@ export class ClientListComponent {
   ];
 
   deleteClient(client: ClientModel) {
-    if (!confirm(`Prajete si zmazať klienta ${client.name}?`)) {
+    if (!confirm(`Prajete si zmazať klienta ${client.username}?`)) {
       return;
     }
     this.isDeleting.set(true);
