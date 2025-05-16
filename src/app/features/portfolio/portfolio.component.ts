@@ -50,15 +50,19 @@ export class PortfolioComponent {
     this.holdings().map(h => ({
       symbol:     h.stock.symbol,
       sharesOwned:     +h.sharesOwned,
+      volatility: h.stock.volatility,
+      expectedReturn: h.stock.expectedReturn,
       totalValue: +(h.stock.currentPrice * h.sharesOwned) // I use + to convert to number
     }))
   );
   //
 
   holdingCols: Column<HoldingViewHelper>[] = [
-    { label: 'Akcia',     attribute: 'symbol' },
-    { label: '"Shares"',    attribute: 'sharesOwned' },
-    { label: 'Celková hodnota',   attribute: 'totalValue' }
+    { label: 'Akcia', width: "25%", attribute: 'symbol' },
+    { label: 'Volatilita',  width: "15%", attribute: 'volatility' },
+    { label: 'Očakávaná návratnosť', width: "15%", attribute: 'expectedReturn' },
+    { label: 'Celková hodnota', width: "30%", attribute: 'totalValue' },
+    { label: '"Shares"',  width: "15%", attribute: 'sharesOwned' },
   ];
 
   simForm    = this.fb.group({
