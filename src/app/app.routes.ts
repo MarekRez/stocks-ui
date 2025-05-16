@@ -49,11 +49,13 @@ export const routes: Routes = [
   {
     path: 'portfolio',
     loadComponent: () => import('./features/portfolio/portfolio.component')
-      .then(m => m.PortfolioComponent)
+      .then(m => m.PortfolioComponent),
+    canActivate: [canActivate]
   },
   {
     path: 'investing', loadComponent: () => import('./features/invest/invest.component')
-      .then(m => m.InvestComponent)
+      .then(m => m.InvestComponent),
+    canActivate: [canActivate]
   },
   {
     path: 'create-stock',
