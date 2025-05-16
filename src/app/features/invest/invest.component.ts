@@ -125,7 +125,7 @@ export class InvestComponent {
 
   holdingCols: Column<HoldingViewHelper>[] = [
     { label: 'Akcia',     attribute: 'symbol' },
-    { label: '"Shares"',     attribute: 'sharesOwned' },
+    { label: 'Vlastnený podiel',     attribute: 'sharesOwned' },
     { label: 'Celková hodnota',      attribute: 'totalValue' },
     { label: 'Predať', width: '100px', text: 'Predať', onClick: h => this.onSellHolding(h) }
   ];
