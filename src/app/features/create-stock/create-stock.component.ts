@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {StockService} from './service/stock.service';
 import {StockModel} from './model/stock-model';
 import {finalize} from 'rxjs';
+import {StockSymbol} from './model/stockSymbol-enum';
 
 @Component({
   selector: 'app-create-stock',
@@ -21,8 +22,11 @@ export class CreateStockComponent {
   success   = signal<string|null>(null);
   error     = signal<string|null>(null);
 
+  // Turn the TS enum into an array of strings:
+  symbols = Object.values(StockSymbol) as StockSymbol[];
+
   stockForm: FormGroup = this.formBuilder.group({
-    symbol: ['', Validators.required],
+    symbol: ['AAPL', Validators.required],
     currency: ['EUR', Validators.required],
     currentPrice: [250, [Validators.required]],
     volatility: [0.80, [Validators.min(0), Validators.max(1)]],
@@ -43,12 +47,7 @@ export class CreateStockComponent {
     this.isSending.set(true);
 
     const payload: StockModel = {
-      symbol:         this.stockForm.value.symbol!,
-      currency:       this.stockForm.value.currency!,
-      currentPrice:   this.stockForm.value.currentPrice!,
-      dividendYield:  this.stockForm.value.dividendYield!,
-      volatility:     this.stockForm.value.volatility!,
-      expectedReturn: this.stockForm.value.expectedReturn!,
+      ...this.stockForm.value // hopefully this works
     };
 
     this.stockService.createStock(payload).pipe(
@@ -57,7 +56,7 @@ export class CreateStockComponent {
       next: stock => {
         this.success.set(`Stock ${stock.symbol} created successfully!`);
         this.stockForm.reset({
-          symbol: '', currency: '', currentPrice: 0,
+          symbol: 'GOOGL', currency: 'USD', currentPrice: 500, volatility: 0.80, dividendYield: 0.03, expectedReturn: 0.4206
         });
       },
       error: err => {

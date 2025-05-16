@@ -1,1 +1,90 @@
-<p>portfolio works!</p>
+<div class="container mt-5 mb-5 d-flex border-0 justify-content-center align-items-center">
+  <div class="card shadow-lg text-bg-secondary p-4 w-100" style="max-width: 1100px;">
+    <div class="card-body">
+
+  <h2 class="mb-4 text-center text-black fw-bold">Portfolio Simulation</h2>
+
+      <!-- My Portfolio -->
+      <div class="col-md-12 mt-4">
+        <h3 class="text-center text-primary fw-bold mb-3 mt-5">Moje Portfólio</h3>
+        @if (holdings().length === 0) {
+          <p class="text-center">No holdings...</p>
+        } @else {
+          <app-table
+            [columns]="holdingCols"
+            [rows]="holdingsView()"
+          ></app-table>
+        }
+      </div>
+
+  <hr class="my-4">
+
+  <!-- 2) Simulation Form -->
+  <form [formGroup]="simForm" (ngSubmit)="onSubmit()" class="row gy-3 gx-5 align-items-end justify-content-center">
+    <div class="col-sm-4">
+      <label for="months" class="form-label text-white ">Months to simulate</label>
+      <input
+        id="months"
+        type="number"
+        formControlName="months"
+        class="form-control"
+        min="1">
+      @if (simForm.get('months')?.touched && simForm.get('months')?.invalid) {
+        <div class="text-danger mt-1">
+          @if (simForm.get('months')!.hasError('required')) {
+            Zadajte počet mesiacov.
+          } @else if (simForm.get('months')!.hasError('min')) {
+            Musí byť aspoň 1.
+          }
+        </div>
+      }
+    </div>
+    <div class="col-sm-2">
+      <button
+        type="submit"
+        class="btn btn-primary w-100"
+        [disabled]="isLoading()">
+        @if (isLoading()) { Simulujem… } @else { Simulovať }
+      </button>
+    </div>
+  </form>
+
+  @if (errorMsg()) {
+    <div class="alert alert-danger mt-3">{{ errorMsg() }}</div>
+  }
+
+  <hr class="my-4">
+
+  <!-- 3) Simulation Results -->
+  @if (result(); as sim) {
+    <div class="row text-center gy-3">
+      <div class="col-md-4">
+        <div class="card p-3 shadow-lg">
+          <h5>Počiatočný zostatok</h5>
+          <p class="fs-4 mb-0">€{{ sim.startBalance}}</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-3 shadow-lg">
+          <h5>Nový zostatok</h5>
+          <p class="fs-4 mb-0">€{{ sim.finalBalance}}</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-3 shadow-lg">
+          <h5>Rozdiel</h5>
+          <p
+            class="fs-4 mb-0"
+            [ngClass]="{
+              'text-success': sim.difference >= 0,
+              'text-danger': sim.difference < 0
+            }">
+            €{{ sim.difference}}
+          </p>
+        </div>
+      </div>
+    </div>
+  }
+    </div>
+  </div>
+</div>
